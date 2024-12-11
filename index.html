@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+
+	<link rel="stylesheet" href="//en.wikipedia.org/w/load.php?debug=false&amp;lang=ja&amp;modules=ext.categoryTree.css%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector"/>
+	<link rel="stylesheet" href="//en.wikipedia.org/w/load.php?debug=false&amp;lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="js/wiki.js" type="text/javascript" defer></script>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() {
+			var $wiki = $('#js-Wiki').wiki({
+				$range: $('#js-Wiki_Range'),
+				$playButton: $('#js-Wiki_Button-play'),
+				$pauseButton: $('#js-Wiki_Button-pause'),
+				$timestamp: $('#js-Wiki_Timestamp')
+			});
+
+			var wiki = $wiki.data('wiki');
+
+			wiki.getRevisions({ titles: '東日本大震災' })
+				.done(function() {
+					console.log('done');
+					wiki.playDiff({ percentage: 0.0 });
+
+					/*
+					setTimeout(function() {
+						wiki.clear();
+					}, 4000);
+					*/
+				})
+				.fail(function(){
+					console.log('fail');
+				});
+		});
+	</script>
+</head>
+<body>
+	<button id="js-Wiki_Button-play" type="button">再生</button>
+	<button id="js-Wiki_Button-pause" type="button">停止</button>
+	<input id="js-Wiki_Range" type="range" value="0" max="0" min="0" step="1" name="revisions" disabled>
+	<div id="js-Wiki_Timestamp"><!-- ここに更新日時が入ります --></div>
+	<div id="js-Wiki"><!-- ここに記事本文が入ります --></div>
+</body>
+</html>
