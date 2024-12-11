@@ -8,7 +8,7 @@
 
 (function() {
 	(function($, window, document) {
-		var MEDIA_WIKI_API_ENDPOINT = 'http://ja.wikipedia.org/w/api.php';
+		var MEDIA_WIKI_API_ENDPOINT = 'https://ja.wikipedia.org/w/api.php';
 		var diffWorker = new Worker('/js/diff-worker.js');
 
 		var defaults = {
